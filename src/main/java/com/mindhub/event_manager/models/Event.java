@@ -1,5 +1,6 @@
 package com.mindhub.event_manager.models;
 
+import com.mindhub.event_manager.dtos.User.EventCreateDTO;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,25 +10,23 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
-public class Event {
-
+@Entity
+public class Event{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
-    private UUID event_id;
-
+    private UUID id;
     private String name;
-    private short age_req;
+    private byte age_req;
     private String desc;
     private String img;
 
     @ManyToOne
     @JoinColumn(name ="organizer_id")
-    private Customer customer;
+    private Organizer organizer;
 
     @OneToMany(mappedBy = "event")
     private Set<Comment> comments = new HashSet<>();
@@ -36,8 +35,17 @@ public class Event {
     private Set<EventLocation> eventLocations = new HashSet<>();
 
 
+    //Constructors
+    public Event(EventCreateDTO eventCreateDTO, Organizer organizer){
+        this.name = eventCreateDTO.getName();
+        this.age_req = eventCreateDTO.getAge_req();
+        this.desc = eventCreateDTO.getDesc();
+        this.img = eventCreateDTO.getImg();
+        this.organizer = organizer;
+    }
+
+
     public void addComment(Comment comment){
-        comment.setEvent(this);
         this.comments.add(comment);
     }
 
@@ -46,11 +54,5 @@ public class Event {
         this.eventLocations.add(eventLocation);
     }
 
-    public Event(String name, short age_req, String desc, String img) {
-        this.name = name;
-        this.age_req = age_req;
-        this.desc = desc;
-        this.img = img;
-    }
 
 }

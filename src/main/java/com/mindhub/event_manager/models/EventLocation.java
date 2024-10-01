@@ -11,16 +11,15 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
+@Entity
 public class EventLocation {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
-    private UUID eventLocation_id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(name="event_id")
@@ -30,20 +29,14 @@ public class EventLocation {
     private Location location;
 
     @OneToMany(mappedBy = "eventLocation")
-    private Set<CustomerEventLocation> customerEventLocations = new HashSet<>();
+    private Set<UserEventLocation> UserEventLocations = new HashSet<>();
 
     private LocalDateTime date;
     private int assistance;
 
-    public void addCustomerEvent(CustomerEventLocation customerEventLocation){
-        customerEventLocation.setEventLocation(this);
-        this.customerEventLocations.add(customerEventLocation);
+    public void addCustomerEvent(UserEventLocation userEventLocation){
+        userEventLocation.setEventLocation(this);
+        this.UserEventLocations.add(userEventLocation);
     }
-
-    public EventLocation(LocalDateTime date, int assistance) {
-        this.date = date;
-        this.assistance = assistance;
-    }
-
 
 }

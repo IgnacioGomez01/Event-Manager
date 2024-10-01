@@ -21,10 +21,11 @@ public class CustomerEventLocation {
 
     @ManyToOne
     @JoinColumn(name="customer_id")
-    private Customer customer;
+    private Users users;
 
     @ManyToOne
     @JoinColumn (name="eventLocation_id")
     private EventLocation eventLocation;
+
 
 }

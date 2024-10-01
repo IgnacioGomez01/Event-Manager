@@ -4,6 +4,8 @@ import com.mindhub.event_manager.models.CustomerEventLocation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public interface CustomerEventLocationRepository extends JpaRepository<CustomerEventLocation,Long> {
+public interface CustomerEventLocationRepository extends JpaRepository<CustomerEventLocation, UUID> {
 }

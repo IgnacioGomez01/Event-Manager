@@ -16,13 +16,13 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter(AccessLevel.NONE)
-    private UUID comment_id;
+    private UUID id;
 
     private String comment;
 
     @ManyToOne
     @JoinColumn(name ="user_id")
-    private Customer customer;
+    private Users users;
 
     @ManyToOne
     @JoinColumn(name ="event_id")

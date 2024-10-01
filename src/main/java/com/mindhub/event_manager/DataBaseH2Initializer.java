@@ -4,41 +4,54 @@ import com.mindhub.event_manager.models.*;
 import com.mindhub.event_manager.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class DataBaseH2Initializer {
-
     @Bean
-    public CommandLineRunner initData(CustomerRepository customerRepository, EventRepository eventRepository, CommentRepository commentRepository, EventLocationRepository eventLocationRepository, LocationRepository locationRepository, CustomerEventLocationRepository customerEventLocationRepository) {
+    public CommandLineRunner initData(
+            UserRepository userRepository,
+            OrganizerRepository organizerRepository,
+            CommentRepository commentRepository,
+            UserEventLocationRepository userEventLocationRepository,
+            EventRepository eventRepository,
+            EventLocationRepository eventLocationRepository,
+            LocationRepository locationRepository) {
         return args -> {
-            Customer customer1 = new Customer();
+
+            Users users1 = new Users();
+            Organizer organizer1 = new Organizer();
             Event event1 = new Event();
             Comment comment1 = new Comment();
+            Comment comment2 = new Comment();
             Location location1 = new Location();
             EventLocation eventLocation1 = new EventLocation();
-            CustomerEventLocation customerEventLocation1 = new CustomerEventLocation();
+            UserEventLocation userEventLocation1 = new UserEventLocation();
 
-            customer1.addCustomerEvent(customerEventLocation1);
-            customer1.addComment(comment1);
-            customer1.addEvent(event1);
+            users1.addCustomerEvent(userEventLocation1);
+            users1.addComment(comment1);
+            users1.addComment(comment2);
 
-            eventLocation1.addCustomerEvent(customerEventLocation1);
+            organizer1.addEvent(event1);
 
+            eventLocation1.addCustomerEvent(userEventLocation1);
             event1.addEventLocation(eventLocation1);
             event1.addComment(comment1);
-
+            event1.addComment(comment2);
             location1.addEventLocation(eventLocation1);
 
-            customerRepository.save(customer1);
+
+            organizerRepository.save(organizer1);
+            userRepository.save(users1); // Save AppUser first
             eventRepository.save(event1);
-
-
-            commentRepository.save(comment1);
             locationRepository.save(location1);
-
             eventLocationRepository.save(eventLocation1);
-            customerEventLocationRepository.save(customerEventLocation1);
+            userEventLocationRepository.save(userEventLocation1);
+
+
+            commentRepository.save(comment1); // Save comments after AppUser
+            commentRepository.save(comment2);
+
         };
     }
 }
