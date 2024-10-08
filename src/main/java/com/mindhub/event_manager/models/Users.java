@@ -36,5 +36,6 @@ public class Users extends Customer {
         this.userEventLocations.add(userEventLocation);
     }
 
+
 }
 
