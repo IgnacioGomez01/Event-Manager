@@ -18,20 +18,20 @@ import java.util.UUID;
 @RequestMapping("/api/users")
 public class UserController {
     @Autowired
-    private com.mindhub.event_manager.repositories.UserRepository UserRepository;
+    private com.mindhub.event_manager.repositories.UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getListDTO(){
-        List<UserDTO> list=UserRepository.findAll().stream().filter(a->a.isActivated()).map(UserDTO::new).toList();
+        List<UserDTO> list=userRepository.findAll().stream().filter(a->a.isActivated()).map(UserDTO::new).toList();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable UUID id) {
-        return UserRepository.findById(id)
+        return userRepository.findById(id)
                 .map(User -> ResponseEntity.ok(new UserDTO(User))) // Return 200 OK with DTO
                 .orElse(ResponseEntity.notFound().build());               // Return 404 if not found
     }
@@ -39,10 +39,9 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserCreateDTO userCreateDTO) {
         userCreateDTO.encodePassword(passwordEncoder);
-        User user = new Users(userCreateDTO);
-        User savedUser = UserRepository.save(user);
+        Users users = new Users(userCreateDTO);
+        Users savedUser =  userRepository.save(users);
         return new ResponseEntity<>(new UserDTO((Users) savedUser), HttpStatus.CREATED);
     }
-
 
 }

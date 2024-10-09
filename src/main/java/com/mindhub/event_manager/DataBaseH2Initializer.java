@@ -1,13 +1,20 @@
 package com.mindhub.event_manager;
 
+import com.mindhub.event_manager.enums.CustomerGender;
+import com.mindhub.event_manager.enums.CustomerRol;
 import com.mindhub.event_manager.models.*;
 import com.mindhub.event_manager.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class DataBaseH2Initializer {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Bean
     public CommandLineRunner initData(
             UserRepository userRepository,
@@ -18,9 +25,11 @@ public class DataBaseH2Initializer {
             EventLocationRepository eventLocationRepository,
             LocationRepository locationRepository) {
         return args -> {
-
-            Users users1 = new Users();
-            Organizer organizer1 = new Organizer();
+            // Initialize entities
+            passwordEncoder.encode("1234");
+            Users appUser1 = new Users("Luis","Gonzales","luis@gmail.com",passwordEncoder.encode("1234"), CustomerRol.USER, (byte) 20, CustomerGender.MALE);
+            Organizer organizer1 = new Organizer("Ignacio","Perez","organizer@gmail.com",passwordEncoder.encode("1234"),CustomerRol.MANAGER);
+            Organizer admin1 = new Organizer("Maria","Becerra","admin@gmail.com",passwordEncoder.encode("1234"),CustomerRol.ADMIN);
             Event event1 = new Event();
             Comment comment1 = new Comment();
             Comment comment2 = new Comment();
@@ -28,9 +37,10 @@ public class DataBaseH2Initializer {
             EventLocation eventLocation1 = new EventLocation();
             UserEventLocation userEventLocation1 = new UserEventLocation();
 
-            users1.addCustomerEvent(userEventLocation1);
-            users1.addComment(comment1);
-            users1.addComment(comment2);
+            // Establish relationships
+            appUser1.addCustomerEvent(userEventLocation1);
+            appUser1.addComment(comment1);
+            appUser1.addComment(comment2);
 
             organizer1.addEvent(event1);
 
@@ -40,14 +50,14 @@ public class DataBaseH2Initializer {
             event1.addComment(comment2);
             location1.addEventLocation(eventLocation1);
 
-
+            // Save related entities in the correct order
             organizerRepository.save(organizer1);
-            userRepository.save(users1); // Save AppUser first
+            userRepository.save(appUser1); // Save AppUser first
+            organizerRepository.save(admin1);
             eventRepository.save(event1);
             locationRepository.save(location1);
             eventLocationRepository.save(eventLocation1);
             userEventLocationRepository.save(userEventLocation1);
-
 
             commentRepository.save(comment1); // Save comments after AppUser
             commentRepository.save(comment2);

@@ -1,7 +1,9 @@
 package com.mindhub.event_manager.models;
 
 
+import com.mindhub.event_manager.dtos.User.UserCreateDTO;
 import com.mindhub.event_manager.enums.CustomerGender;
+import com.mindhub.event_manager.enums.CustomerRol;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
@@ -26,6 +28,18 @@ public class Users extends Customer {
     @OneToMany(mappedBy = "users")
     private Set<UserEventLocation> userEventLocations = new HashSet<>();
 
+    public Users(UserCreateDTO appUserCreateDTO){
+        super(appUserCreateDTO.getName(), appUserCreateDTO.getLastname(), appUserCreateDTO.getEmail(), appUserCreateDTO.getPassword(), appUserCreateDTO.getCustomerRol());
+        this.age = appUserCreateDTO.getAge();
+        this.gender = appUserCreateDTO.getGender();
+    }
+
+    public Users(String name, String lastname, String email, String password, CustomerRol rol, byte age, CustomerGender gender) {
+        super(name, lastname, email, password, rol);
+        this.age = age;
+        this.gender = gender;
+    }
+
     public void addComment(Comment comment){
         comment.setUsers(this);
         this.comments.add(comment);
@@ -35,7 +49,6 @@ public class Users extends Customer {
         userEventLocation.setUsers(this);
         this.userEventLocations.add(userEventLocation);
     }
-
 
 }
 

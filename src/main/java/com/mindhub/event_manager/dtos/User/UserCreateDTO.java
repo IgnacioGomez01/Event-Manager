@@ -18,8 +18,8 @@ public class UserCreateDTO {
     private CustomerGender gender;
     private String password;
     private CustomerRol customerRol = CustomerRol.USER;
+
     public void encodePassword (PasswordEncoder passwordEncoder){
         this.password = passwordEncoder.encode(this.password);
     }
-}
 }

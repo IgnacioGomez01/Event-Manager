@@ -29,4 +29,6 @@ public class Customer{
     private String password;
     private CustomerRol rol;
 
+    public Customer(String name, String lastname, String email, String password, CustomerRol customerRol) {
+    }
 }
