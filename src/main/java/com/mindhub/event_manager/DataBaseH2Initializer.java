@@ -30,7 +30,7 @@ public class DataBaseH2Initializer {
             Users appUser1 = new Users("Luis","Gonzales","luis@gmail.com",passwordEncoder.encode("1234"), CustomerRol.USER, (byte) 20, CustomerGender.MALE);
             Organizer organizer1 = new Organizer("Ignacio","Perez","organizer@gmail.com",passwordEncoder.encode("1234"),CustomerRol.MANAGER);
             Organizer organizer2 = new Organizer("Facundo","Gomez","organizer2@gmail.com",passwordEncoder.encode("12345"),CustomerRol.MANAGER);
-            Organizer admin1 = new Organizer("Maria","Becerra","admin@gmail.com",passwordEncoder.encode("1234"),CustomerRol.ADMIN);
+            Organizer admin1 = new Organizer("Maria","Edith","admin@gmail.com",passwordEncoder.encode("1234"),CustomerRol.ADMIN);
             Event event1 = new Event();
             Comment comment1 = new Comment();
             Comment comment2 = new Comment();
