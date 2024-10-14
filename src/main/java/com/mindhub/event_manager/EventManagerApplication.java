@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class EventManagerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EventManagerApplication.class, args);
-	}
+	public static void main(String[] args) {SpringApplication.run(EventManagerApplication.class, args);
 
+	}
 }

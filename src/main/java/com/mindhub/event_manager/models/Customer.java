@@ -29,6 +29,11 @@ public class Customer{
     private String password;
     private CustomerRol rol;
 
-    public Customer(String name, String lastname, String email, String password, CustomerRol customerRol) {
+    public Customer(String name, String lastname, String email, String password, CustomerRol rol) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.rol = rol;
     }
 }

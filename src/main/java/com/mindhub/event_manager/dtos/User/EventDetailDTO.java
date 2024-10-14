@@ -23,6 +23,7 @@ public class EventDetailDTO {
     private Set<LocationSummaryDTO> locations = new HashSet<>();
     private Set<CommentSummaryDTO> comments = new HashSet<>();
 
+
     public EventDetailDTO(Event event){
         this.id = event.getId();
         this.name = event.getName();

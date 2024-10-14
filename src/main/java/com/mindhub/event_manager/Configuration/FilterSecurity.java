@@ -23,7 +23,7 @@ public class FilterSecurity {
                     path.requestMatchers("/index.html", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
                             .requestMatchers(HttpMethod.POST, "/api/crearevento").hasAnyAuthority("ADMIN", "MANAGER")
                             .requestMatchers("/api/events").hasAuthority("USER")
-                            .anyRequest().denyAll();
+                            .anyRequest().permitAll();
                 })
                 .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
                 .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(

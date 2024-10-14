@@ -41,7 +41,7 @@ public class UserController {
         userCreateDTO.encodePassword(passwordEncoder);
         Users users = new Users(userCreateDTO);
         Users savedUser =  userRepository.save(users);
-        return new ResponseEntity<>(new UserDTO((Users) savedUser), HttpStatus.CREATED);
+        return new ResponseEntity<>(new UserDTO(savedUser), HttpStatus.CREATED);
     }
 
 }

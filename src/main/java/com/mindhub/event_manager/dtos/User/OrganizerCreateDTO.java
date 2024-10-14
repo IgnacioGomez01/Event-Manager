@@ -14,6 +14,7 @@ public class OrganizerCreateDTO {
     private String email;
     private String password;
     private CustomerRol customerRol = CustomerRol.MANAGER;
+
     public void encodePassword (PasswordEncoder passwordEncoder){
         this.password = passwordEncoder.encode(this.password);
     }
