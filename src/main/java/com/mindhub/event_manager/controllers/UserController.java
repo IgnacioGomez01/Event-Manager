@@ -36,7 +36,7 @@ public class UserController {
                 .orElse(ResponseEntity.notFound().build());               // Return 404 if not found
     }
 
-    @PostMapping
+    @PostMapping("/crear")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserCreateDTO userCreateDTO) {
         userCreateDTO.encodePassword(passwordEncoder);
         Users users = new Users(userCreateDTO);
