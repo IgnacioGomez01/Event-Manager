@@ -54,11 +54,20 @@
                             <input type="email" class="form-control emailCrear" placeholder="">
                             <label for="floatingInput">Email</label>
                         </div>
-                        <div class="form-floating mb-4">
+                        <div class="form-floating mb-3">
                             <input type="password" class="form-control passwordCrear" placeholder="">
                             <label for="floatingPassword">Contraseña</label>
                         </div>
-
+                        <div style="display: flex; justify-content: center; align-items: center;" class="mb-4">
+                            <h6 style="display: flex; margin-bottom: 0; margin-right: 0.5rem;">Genero:</h6>
+                            <select class="form-select form-select-sm d-flex genderSelect"
+                                aria-label=".form-select-sm example">
+                                <option value="NOSELECT" selected="">Selecciona una opción</option>
+                                <option value="MALE">Masculino</option>
+                                <option value="FEMALE">Femenino</option>
+                                <option value="NONBINARY">No binario</option>
+                            </select>
+                        </div>
                         <button type="submit" class="btn btn-primary py-3 w-100 mb-4 botonCrear">Crear</button>
                         <p class="text-center mb-0">Ya tienes una cuenta? <a href="./signin.html">Iniciar sesion</a></p>
                     </div>
@@ -87,32 +96,41 @@
 
             event.preventDefault(); // Evitar que el formulario se envíe de forma tradicional
 
-            // Capturar los valores de los inputs
-            const username = $('#sernameCrear').val();
-            const email = $('emailCrear').val();
-            const password = $('passwordCrear').val();
+            if ($('.genderSelect').val() == "NOSELECT" || $('.usernameCrear').val() == "" || $('.emailCrear').val() == "" || $('.passwordCrear').val() == "") {
+                alert("Complete y seleccione cada uno de los campos para continuar")
+            } else {
+                // Capturar los valores de los inputs
+                const username = $('.usernameCrear').val();
+                const email = $('.emailCrear').val();
+                const password = $('.passwordCrear').val();
+                const gender = $('.genderSelect').val();
 
-            // Enviar la solicitud POST
-            $.ajax({
-                url: 'http://localhost:8080/api/users/crear', // Endpoint completo con el puerto correcto
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    name: username,
-                    lastname: "-",
-                    email: email,
-                    password: password,
-                    customerRol: "USER"
-                }),
-                success: function (response) {
-                    console.log('Cuenta creada con éxito:', response);
-                    alert('Cuenta creada con éxito');
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error al crear la cuenta:', error);
-                    alert('Hubo un error al crear la cuenta. Por favor, intenta de nuevo.');
-                }
-            });
+                // Enviar la solicitud POST
+                $.ajax({
+                    url: 'http://localhost:8080/api/users/crear', // Endpoint completo con el puerto correcto
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        name: username,
+                        lastname: "",
+                        email: email,
+                        age: "",
+                        gender: gender,
+                        password: password,
+                        customerRol: "USER"
+                    }),
+                    success: function (response) {
+                        console.log('Cuenta creada con éxito:', response);
+                        alert('Cuenta creada con éxito');
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error al crear la cuenta:', error);
+                        alert('Hubo un error al crear la cuenta. Por favor, intenta de nuevo.');
+                    }
+                });
+            }
+
+
         });
     });
 </script>
