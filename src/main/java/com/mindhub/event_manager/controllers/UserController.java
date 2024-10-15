@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RequestMapping("/api/users")
 public class UserController {
     @Autowired
@@ -35,6 +36,7 @@ public class UserController {
                 .map(User -> ResponseEntity.ok(new UserDTO(User))) // Return 200 OK with DTO
                 .orElse(ResponseEntity.notFound().build());               // Return 404 if not found
     }
+
 
     @PostMapping("/crear")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserCreateDTO userCreateDTO) {
