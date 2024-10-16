@@ -48,7 +48,7 @@
                         </div>
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control usernameCrear" placeholder="">
-                            <label for="floatingText">Nombre de usuario</label>
+                            <label for="floatingText">Nombre</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control emailCrear" placeholder="">
@@ -92,47 +92,64 @@
 
         $(".botonCrear").click('submit', function (event) {
 
-            console.log("llega");
-
-            event.preventDefault(); // Evitar que el formulario se envíe de forma tradicional
+            event.preventDefault();
 
             if ($('.genderSelect').val() == "NOSELECT" || $('.usernameCrear').val() == "" || $('.emailCrear').val() == "" || $('.passwordCrear').val() == "") {
-                alert("Complete y seleccione cada uno de los campos para continuar")
+                alert("Complete y seleccione cada uno de los campos para continuar");
             } else {
-                // Capturar los valores de los inputs
+
                 const username = $('.usernameCrear').val();
                 const email = $('.emailCrear').val();
                 const password = $('.passwordCrear').val();
                 const gender = $('.genderSelect').val();
 
-                // Enviar la solicitud POST
+                
                 $.ajax({
-                    url: 'http://localhost:8080/api/users/crear', // Endpoint completo con el puerto correcto
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        name: username,
-                        lastname: "",
-                        email: email,
-                        age: "",
-                        gender: gender,
-                        password: password,
-                        customerRol: "USER"
-                    }),
+                    url: 'http://localhost:8080/api/users', 
+                    type: 'GET',
                     success: function (response) {
-                        console.log('Cuenta creada con éxito:', response);
-                        alert('Cuenta creada con éxito');
+    
+                        const emailExistente = response.some(user => user.email === email);
+
+                        if (emailExistente) {
+                            alert("El correo ya está registrado. Por favor, utiliza otro correo.");
+                        } else {
+                            crearCuenta(username, email, password, gender);
+                        }
                     },
                     error: function (xhr, status, error) {
-                        console.error('Error al crear la cuenta:', error);
-                        alert('Hubo un error al crear la cuenta. Por favor, intenta de nuevo.');
+                        console.error('Error al obtener la lista de usuarios:', error);
+                        alert('Hubo un error al obtener la lista de usuarios. Por favor, intenta de nuevo.');
                     }
                 });
             }
-
-
         });
+
+        function crearCuenta(username, email, password, gender) {
+            $.ajax({
+                url: 'http://localhost:8080/api/users/crear',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    name: username,
+                    lastname: "",
+                    email: email,
+                    age: "",
+                    gender: gender,
+                    password: password,
+                    customerRol: "USER"
+                }),
+                success: function (response) {
+                    alert('Cuenta creada con éxito');
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error al crear la cuenta:', error);
+                    alert('Hubo un error al crear la cuenta. Por favor, intenta de nuevo.');
+                }
+            });
+        }
     });
+
 </script>
 
 </html>
