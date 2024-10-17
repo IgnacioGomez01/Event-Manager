@@ -14,12 +14,16 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,7 +33,7 @@
 </head>
 
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
+    <div class="container-xxl position-relative d-flex p-0" style="background-color: #595959 !important;">
 
         <!-- Sign In Start -->
         <div class="container-fluid">
@@ -43,14 +47,15 @@
                             <h4>Iniciar sesion</h4>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <input type="email" class="form-control emailLogin" placeholder="name@example.com">
                             <label for="floatingInput">Email</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <input type="password" class="form-control passwordLogin" placeholder="Password">
                             <label for="floatingPassword">Contraseña</label>
                         </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4 botonIniciarSesion">Iniciar
+                            sesion</button>
                         <p class="text-center mb-0">No tienes cuenta? <a href="./signup.html">Crear cuenta</a></p>
                     </div>
                 </div>
@@ -58,19 +63,53 @@
         </div>
         <!-- Sign In End -->
     </div>
-
-    <script>
-        
-                
-
-    </script>
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
 </body>
+
+
+<script>
+    $(document).ready(function () {
+
+        $(".botonIniciarSesion").click('submit', function (event) {
+            event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+            $.ajax({
+                url: 'http://localhost:8080/api/users', // Obtener la lista de usuarios
+                type: 'GET',
+                success: function (response) {
+                    console.log(response);
+                    const email = $('.emailLogin').val();
+                    const password = $('.passwordLogin').val();
+
+                    // Bandera para determinar si encontró el usuario
+                    let usuarioEncontrado = false;
+
+                    // Recorrer los usuarios
+                    for (let i = 0; i < response.length; i++) {
+                        if (response[i].email === email && response[i].password === password) {
+                            alert("Inicio de sesión correcto");
+                            usuarioEncontrado = true; // Usuario válido encontrado
+                            break; // Detener el bucle ya que no es necesario seguir buscando
+                        }
+                    }
+
+                    // Si no se encontró ningún usuario que coincida
+                    if (!usuarioEncontrado) {
+                        alert("Usuario o contraseña incorrectos");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error al obtener la lista de usuarios:', error);
+                    alert('Hubo un error al obtener la lista de usuarios. Por favor, intenta de nuevo.');
+                }
+            });
+        });
+    });
+
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </html>
