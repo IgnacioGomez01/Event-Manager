@@ -33,31 +33,36 @@
 </head>
 
 <body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
+    <div class="container-xxl position-relative d-flex p-0" style="background-color: #595959 !important;">
 
         <!-- Sign Up Start -->
         <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="index.html" class="">
-                                <h3 class="text-primary">Eventos Zent</h3>
-                            </a>
+                            <h3 class="text-primary">Eventos Zent</h3>
                             <h3>Crear Cuenta</h3>
                         </div>
+
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control usernameCrear" placeholder="">
                             <label for="floatingText">Nombre</label>
                         </div>
+
                         <div class="form-floating mb-3">
                             <input type="email" class="form-control emailCrear" placeholder="">
                             <label for="floatingInput">Email</label>
                         </div>
+
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control passwordCrear" placeholder="">
                             <label for="floatingPassword">Contraseña</label>
                         </div>
+
                         <div style="display: flex; justify-content: center; align-items: center;" class="mb-4">
                             <h6 style="display: flex; margin-bottom: 0; margin-right: 0.5rem;">Genero:</h6>
                             <select class="form-select form-select-sm d-flex genderSelect"
@@ -68,8 +73,10 @@
                                 <option value="NONBINARY">No binario</option>
                             </select>
                         </div>
+
                         <button type="submit" class="btn btn-primary py-3 w-100 mb-4 botonCrear">Crear</button>
                         <p class="text-center mb-0">Ya tienes una cuenta? <a href="./signin.html">Iniciar sesion</a></p>
+
                     </div>
                 </div>
             </div>
@@ -80,11 +87,6 @@
 
 
 </body>
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-
-
 
 <script>
 
@@ -103,12 +105,12 @@
                 const password = $('.passwordCrear').val();
                 const gender = $('.genderSelect').val();
 
-                
+
                 $.ajax({
-                    url: 'http://localhost:8080/api/users', 
+                    url: 'http://localhost:8080/api/users',
                     type: 'GET',
                     success: function (response) {
-    
+                        console.log(response);
                         const emailExistente = response.some(user => user.email === email);
 
                         if (emailExistente) {
@@ -141,6 +143,7 @@
                 }),
                 success: function (response) {
                     alert('Cuenta creada con éxito');
+                    //window.location.href = './signin.html';
                 },
                 error: function (xhr, status, error) {
                     console.error('Error al crear la cuenta:', error);
@@ -152,4 +155,9 @@
 
 </script>
 
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </html>
+
