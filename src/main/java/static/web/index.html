@@ -64,12 +64,11 @@
 
                 <div class="nav-item d-flex">
                     <a href="./signin.html" class="nav-link">
-                        <button type="button" class="btn"
-                            style="background-color: #ff7b49; color: white;    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Inicie sesion</button>
+                        <button type="button" class="btn letraSistema" style="background-color: #ff7b49; color: white;">Inicie sesion</button>
                     </a>
-                    <a href="./signup.html" class="nav-link">
+                    <a href="./signup.html" class="nav-link letraSistema">
                         <button type="button" class="btn"
-                            style="background-color:#0bb945; color: white;     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Crear
+                            style="background-color:#0bb945; color: white;">Crear
                             cuenta</button>
                     </a>
                 </div>
@@ -77,8 +76,16 @@
         </div>
     </nav>
     <main>
-        <article class="bg-light" style="height: 76.5vh;border-bottom: 1px solid #e9e9e9 !important;">
-
+        <article class="bg-light" style="height: 76.5vh;border-bottom: 1px solid #e9e9e9 !important; display: flex;align-items: center;justify-content: center;">
+            <header>
+                <div>
+                    <h2>Hermosos Calendarios</h2>
+                    <h2>Reservas Robustas</h2>
+                    <h2>Caracteristicas Personalizadas</h2>
+                    <p class="letraSistema">El Gestor de Eventos mas potente y flexible</p>
+                    <p class="letraSistema">Administre rapido y facilmente eventos, reservas y <br> asistentes con un solo complemento</p>
+            </div>
+            </header>
         </article>
     </main>
 </body>
@@ -86,6 +93,16 @@
 </html>
 
 <style>
+
+    .letraSistema{
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    h2{
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 600;
+        font-size: 46px;
+    }
     .letrasNav {
         font-weight: 600;
         font-size: 16px;
@@ -98,4 +115,9 @@
     .ancoresNav .span :hover {
         color: white !important;
     }
+p{
+    margin-bottom: 0;
+    color: black;
+}
+
 </style>
