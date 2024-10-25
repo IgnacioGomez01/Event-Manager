@@ -27,6 +27,8 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
@@ -64,11 +66,11 @@
 
                 <div class="nav-item d-flex">
                     <a href="./signin.html" class="nav-link">
-                        <button type="button" class="btn letraSistema" style="background-color: #ff7b49; color: white;">Inicie sesion</button>
+                        <button type="button" class="btn letraSistema"
+                            style="background-color: #ff7b49; color: white;">Inicie sesion</button>
                     </a>
                     <a href="./signup.html" class="nav-link letraSistema">
-                        <button type="button" class="btn"
-                            style="background-color:#0bb945; color: white;">Crear
+                        <button type="button" class="btn" style="background-color:#0bb945; color: white;">Crear
                             cuenta</button>
                     </a>
                 </div>
@@ -76,33 +78,100 @@
         </div>
     </nav>
     <main>
-        <article class="bg-light" style="height: 76.5vh;border-bottom: 1px solid #e9e9e9 !important; display: flex;align-items: center;justify-content: center;">
-            <header>
-                <div>
-                    <h2>Hermosos Calendarios</h2>
-                    <h2>Reservas Robustas</h2>
-                    <h2>Caracteristicas Personalizadas</h2>
-                    <p class="letraSistema">El Gestor de Eventos mas potente y flexible</p>
-                    <p class="letraSistema">Administre rapido y facilmente eventos, reservas y <br> asistentes con un solo complemento</p>
+        <article class="bg-light"
+            style="height: 76.5vh;border-bottom: 1px solid #e9e9e9 !important; display: flex;align-items: center;justify-content: center;">
+            <div style="display: flex; width: 65%;justify-content: space-between;">
+                <header>
+                    <div style="display: flex; height: 100%; flex-direction: column; justify-content: space-around;">
+                        <h2>Hermosos Calendarios</h2>
+                        <h2>Reservas Robustas</h2>
+                        <h2>Todo Personalizable</h2>
+                        <p class="letraSistema">El Gestor de Eventos mas potente y flexible</p>
+                        <p class="letraSistema">Administre rapido y facilmente eventos, reservas y <br> asistentes con
+                            un solo complemento</p>
+                        <div style="display: flex;">
+                            <button type="button" class="btn"
+                                style="background-color: #ff7b49;color: white;font-size: 15px;display: flex;align-items: center;padding: 0;height: 3rem;">
+                                <div class="letraSistema"
+                                    style="display: flex;padding-top: 14px;padding-bottom: 14px;padding-left: 14px;padding-right: 1rem;">
+                                    Comprar Ahora</div>
+                                <div style="background-color: #F06424;height: 100% !important;display: flex;align-items: center;border-radius: 0px 5px 5px 0px;justify-content: center;">
+                                    <i class="bi bi-chevron-right" style="display: flex;margin-left: 1rem;padding-right: 0.5rem;"></i></div>
+                            </button>
+                            <button type="button" class="btn btn-outline-info" style="font-size: 15px; padding: 14px 27px; height: 3rem; margin-left: 0.5rem;">Ver</button>
+                        </div>
+                    </div>
+                </header>
+                <figure style="margin: 0;">
+                    <div id="carouselExampleDark" class="carousel carousel-dark slide carousel-fade"
+                        data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active" data-bs-interval="6000">
+                                <img src="./img/metricas+info.PNG" class="d-block maxAltoFotoCarousel" alt="...">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="6000">
+                                <img src="./img/calendario.PNG" class="d-block maxAltoFotoCarousel" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                </figure>
             </div>
-            </header>
         </article>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
 
 <style>
+    #carouselExampleDark {
+        width: 600px;
+        height: 400px;
+        overflow: hidden;
+    }
 
-    .letraSistema{
+    .carousel-inner {
+        width: 600px;
+        height: 400px;
+    }
+
+    .maxAltoFotoCarousel {
+        height: 400px;
+        object-fit: fill;
+        width: 600px;
+    }
+
+    .letraSistema {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-    h2{
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-weight: 600;
-        font-size: 46px;
+    h2 {
+        font-family: system-ui;
+    font-weight: 400;
+    font-size: 44px;
+    margin: 0;
+    line-height: 0.7;
     }
+
     .letrasNav {
         font-weight: 600;
         font-size: 16px;
@@ -115,9 +184,9 @@
     .ancoresNav .span :hover {
         color: white !important;
     }
-p{
-    margin-bottom: 0;
-    color: black;
-}
 
+    p {
+        margin-bottom: 0;
+        color: black;
+    }
 </style>
